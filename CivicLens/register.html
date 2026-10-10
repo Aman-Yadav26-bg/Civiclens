@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Registration | CivicLens</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+  <div class="auth-card wide">
+    <a class="brand" href="index.html"><span>🌿</span> CivicLens</a>
+    <h1>Create Citizen Account</h1>
+    <p>Join your municipal civic resolution network.</p>
+
+    <form id="registerForm">
+      <div class="form-grid">
+        <label>Full Name
+          <input id="regName" required placeholder="Aditya Kumar">
+        </label>
+        <label>Email Address
+          <input id="regEmail" type="email" required placeholder="aditya@example.com">
+        </label>
+        <label>Mobile Number
+          <input type="tel" placeholder="+91 98765 43210">
+        </label>
+        <label>City / Municipal Zone
+          <select id="regCity">
+            <option value="Central Zone">Central Municipal Zone</option>
+            <option value="North Zone">North Municipal Zone</option>
+            <option value="East Zone">East Municipal Zone</option>
+            <option value="South Zone">South Municipal Zone</option>
+          </select>
+        </label>
+        <label>Create Password
+          <input type="password" required placeholder="••••••••">
+        </label>
+        <label>Confirm Password
+          <input type="password" required placeholder="••••••••">
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-full btn-lg">Create Citizen Account →</button>
+    </form>
+
+    <p class="center" style="margin-top:20px;">Already registered? <a href="login.html">Sign In</a></p>
+    <a class="back" href="index.html">← Back to Homepage</a>
+  </div>
+
+  <div id="toast"></div>
+  <script src="js/script.js"></script>
+</body>
+</html>

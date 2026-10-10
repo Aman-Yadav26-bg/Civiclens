@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipal Command Center | CivicLens Admin</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar dashboard-nav">
+    <a class="brand" href="admin.html"><span>🌿</span> CivicLens <em>ADMIN</em></a>
+    <div class="navlinks">
+      <a class="active" href="admin.html">Admin Command</a>
+      <a href="officer.html">Officer Desk</a>
+      <a href="complaints.html">Citizen View</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="welcome">
+      <div>
+        <span class="eyebrow">Government Command Center • Municipal GIS Analytics</span>
+        <h1>Administration & GIS Analytics</h1>
+        <p>City-wide civic issue density, department SLAs, and live resolution monitoring.</p>
+      </div>
+      <button class="btn btn-primary" onclick="showToast('✓ City-wide Civic Audit Report exported as CSV.')">↓ Export Audit Report</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span>📋</span>
+        <b id="adminTotal">12,480</b>
+        <small>Total Complaints</small>
+      </div>
+      <div class="stat">
+        <span>⏳</span>
+        <b id="adminPending">1,184</b>
+        <small>Pending Action</small>
+      </div>
+      <div class="stat">
+        <span>🔧</span>
+        <b id="adminProgress">1,436</b>
+        <small>In Progress</small>
+      </div>
+      <div class="stat success">
+        <span>✓</span>
+        <b id="adminResolved">9,860</b>
+        <small>Verified Resolved</small>
+      </div>
+    </div>
+
+    <div class="analytics-grid">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Monthly Complaint Trends</h2>
+          <span>Fiscal Year 2026</span>
+        </div>
+        <div class="chart">
+          <div class="bar" style="height:42%"><i>1.4k</i><small>Mar</small></div>
+          <div class="bar" style="height:58%"><i>1.9k</i><small>Apr</small></div>
+          <div class="bar" style="height:51%"><i>1.7k</i><small>May</small></div>
+          <div class="bar" style="height:74%"><i>2.4k</i><small>Jun</small></div>
+          <div class="bar" style="height:66%"><i>2.1k</i><small>Jul</small></div>
+          <div class="bar active" style="height:88%"><i>2.8k</i><small>Aug</small></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Category Distribution</h2>
+          <span class="badge low">AI Clustered</span>
+        </div>
+        <div class="donut">
+          <div><b>34%</b><small>Potholes</small></div>
+        </div>
+        <div class="legend">
+          <span>🕳️ Potholes & Roads <b>34%</b></span>
+          <span>🗑️ Waste Management <b>26%</b></span>
+          <span>💡 Street Lighting <b>22%</b></span>
+          <span>🚰 Water & Drainage <b>18%</b></span>
+        </div>
+      </section>
+    </div>
+
+    <div class="content-grid">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Critical Priority Complaints</h2>
+          <span class="badge critical">Urgent Action</span>
+        </div>
+        <div id="adminList"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Department SLA Performance</h2>
+        </div>
+        <div class="dept">
+          <span>Public Works Department <b>94%</b></span>
+          <div><i style="width:94%"></i></div>
+        </div>
+        <div class="dept">
+          <span>Sanitation Division <b>88%</b></span>
+          <div><i style="width:88%"></i></div>
+        </div>
+        <div class="dept">
+          <span>Water Supply & Sewerage <b>82%</b></span>
+          <div><i style="width:82%"></i></div>
+        </div>
+        <div class="dept">
+          <span>Electricity & Lighting <b>78%</b></span>
+          <div><i style="width:78%"></i></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel map-panel">
+      <div class="panel-head">
+        <h2>📍 Live City-Wide GIS Civic Heatmap</h2>
+        <div>
+          <span class="dot red"></span> Critical / High
+          <span class="dot orange"></span> Medium
+          <span class="dot green"></span> Resolved
+        </div>
+      </div>
+      <div id="adminMap" class="map-container-lg"></div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

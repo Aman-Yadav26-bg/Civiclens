@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Citizen Dashboard | CivicLens</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar dashboard-nav">
+    <a class="brand" href="dashboard.html"><span>🌿</span> CivicLens</a>
+    <div class="navlinks">
+      <a class="active" href="dashboard.html">Dashboard</a>
+      <a href="report.html">Report Issue</a>
+      <a href="complaints.html">Civic Issues</a>
+      <a href="officer.html">Officer Desk</a>
+      <a href="admin.html">Admin</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="welcome">
+      <div>
+        <span class="eyebrow">Citizen Portal • SIH25031</span>
+        <h1 id="citizenGreeting">Good morning, Aditya 👋</h1>
+        <p>Real-time overview of your filed civic complaints and neighborhood resolutions.</p>
+      </div>
+      <a href="report.html" class="btn btn-primary btn-lg">📍 Report Civic Issue</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span>📋</span>
+        <b id="totalStat">12</b>
+        <small>Total Reports</small>
+      </div>
+      <div class="stat">
+        <span>⏳</span>
+        <b id="pendingStat">3</b>
+        <small>Pending / Dispatched</small>
+      </div>
+      <div class="stat">
+        <span>🔧</span>
+        <b id="progressStat">4</b>
+        <small>Work In Progress</small>
+      </div>
+      <div class="stat success">
+        <span>✓</span>
+        <b id="resolvedStat">5</b>
+        <small>Resolved with Proof</small>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Recent Civic Complaints</h2>
+          <a href="complaints.html">View all community issues →</a>
+        </div>
+        <div id="recentList"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Standard Lifecycle Flow</h2>
+          <span class="badge low">Automated SLA</span>
+        </div>
+        <div class="timeline compact">
+          <div class="done">
+            <b>1. Citizen Report & AI Vision</b>
+            <small>Live GPS coordinates, photos & AI risk severity calculation</small>
+          </div>
+          <div class="done">
+            <b>2. GIS Ward Routing & Email Alert</b>
+            <small>Automated dispatch to designated municipal nodal engineer</small>
+          </div>
+          <div class="current">
+            <b>3. Officer Field Execution</b>
+            <small>Ground crew repair & mandatory "After Resolution Photo" upload</small>
+          </div>
+          <div>
+            <b>4. Citizen Verification & Closure</b>
+            <small>Public confirmation with transparent audit history</small>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="toast"></div>
+  <script src="js/script.js"></script>
+</body>
+</html>

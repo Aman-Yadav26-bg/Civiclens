@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Civic Issue | CivicLens</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar dashboard-nav">
+    <a class="brand" href="dashboard.html"><span>🌿</span> CivicLens</a>
+    <div class="navlinks">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="complaints.html">My Issues</a>
+      <a href="officer.html">Officer Desk</a>
+      <a href="admin.html">Admin Command</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">Citizen Reporting • SIH25031</span>
+        <h1>Report a Civic Issue</h1>
+        <p>Real-time GIS routing, automated AI vision analysis, and nodal alert dispatch.</p>
+      </div>
+    </div>
+
+    <div class="report-layout">
+      <section class="panel">
+        <div class="progress">
+          <span class="active">1</span><i></i>
+          <span class="active">2</span><i></i>
+          <span class="active">3</span>
+        </div>
+
+        <form id="reportForm">
+          <label>Issue Category
+            <select id="category" required>
+              <option value="">Select an issue category</option>
+              <option value="Pothole">🕳️ Pothole & Road Damage</option>
+              <option value="Garbage">🗑️ Garbage & Open Waste</option>
+              <option value="Street Light">💡 Street Light Breakdown</option>
+              <option value="Water Leakage">🚰 Water Pipeline Leakage</option>
+              <option value="Damaged Road">🚧 Damaged Road / Cavity</option>
+              <option value="Drainage">🌧️ Blocked Drainage / Overflow</option>
+              <option value="Sanitation">🚽 Public Sanitation</option>
+              <option value="Environment">🌳 Fallen Trees & Environment</option>
+              <option value="Other">📍 Other Civic Problem</option>
+            </select>
+          </label>
+
+          <div class="photo-capture-section">
+            <div class="section-label-row">
+              <label class="section-label">📸 Live Camera Evidence (Ground Reality) <span class="required-star">*</span></label>
+              <span class="badge high" id="captureStatusBadge">● Live Camera Mandatory</span>
+            </div>
+
+            <div class="live-only-notice">
+              <span>🔒 Anti-Fraud Policy:</span> Reports require a mandatory live on-site photo with real-time GPS & timestamp verification.
+            </div>
+
+            <!-- Live Camera Container -->
+            <div id="liveCameraContainer" class="camera-container">
+              <!-- Camera Launch State -->
+              <div id="cameraPrompt" class="camera-prompt-box">
+                <div class="cam-prompt-icon">📸</div>
+                <h4>Capture Live Ground Reality</h4>
+                <p>Point your camera at the civic issue. Real-time GPS coordinates and timestamp will be stamped on capture.</p>
+                <button type="button" id="startCamBtn" class="btn btn-primary btn-lg">
+                  <span style="font-size:18px;">🎥</span> Open Live Camera
+                </button>
+                <div class="cam-features-pills">
+                  <span>🛰️ Live Geo-Stamp</span>
+                  <span>🤖 Instant AI Scan</span>
+                  <span>🔒 Tamper-Proof Evidence</span>
+                </div>
+              </div>
+
+              <!-- Live Video Viewfinder -->
+              <div id="cameraViewfinder" class="camera-viewfinder hidden">
+                <video id="cameraVideo" autoplay playsinline muted></video>
+                <div id="camFlashOverlay" class="cam-flash-overlay"></div>
+                
+                <!-- HUD Overlays -->
+                <div class="viewfinder-hud top-hud">
+                  <span class="live-rec-badge"><span class="rec-dot"></span> LIVE CAM</span>
+                  <div class="hud-actions">
+                    <button type="button" id="torchBtn" class="cam-tool-btn hidden" title="Toggle Flashlight">⚡ Flash</button>
+                    <button type="button" id="flipCamBtn" class="cam-tool-btn" title="Switch Front/Rear Camera">🔄 Flip</button>
+                  </div>
+                </div>
+
+                <div class="viewfinder-crosshair">
+                  <div class="reticle-box"></div>
+                </div>
+
+                <div class="viewfinder-hud bottom-hud">
+                  <div class="hud-geotag">
+                    <span id="hudLocationText">📍 Acquiring GPS coordinates...</span>
+                    <span id="hudTimestamp">⏱️ Live Timestamp</span>
+                  </div>
+                </div>
+
+                <!-- Camera Action Controls -->
+                <div class="camera-controls-bar">
+                  <button type="button" id="closeCamBtn" class="cam-circle-btn close-btn" title="Close Camera">✕</button>
+                  <button type="button" id="snapPhotoBtn" class="cam-shutter-btn" title="Capture Photo">
+                    <div class="shutter-inner"></div>
+                  </button>
+                  <button type="button" id="switchSourceBtn" class="cam-circle-btn switch-btn" title="Switch View">🔄</button>
+                </div>
+              </div>
+
+              <!-- Camera Permission / Error Fallback Notice -->
+              <div id="cameraErrorBox" class="camera-error-box hidden">
+                <div style="font-size:32px;margin-bottom:6px;">⚠️</div>
+                <h4 id="camErrorTitle">Camera Access Needed</h4>
+                <p id="camErrorMsg">Please grant camera permission in your browser to capture live civic photos.</p>
+                <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
+                  <button type="button" id="retryCamBtn" class="btn btn-primary btn-sm">🔄 Retry Camera</button>
+                  <label class="btn btn-outline btn-sm" style="margin:0;cursor:pointer;">
+                    📱 Open Device Camera App
+                    <input type="file" id="nativeCamInput" accept="image/*" capture="environment" style="display:none;">
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hidden Canvas for Frame Capture -->
+            <canvas id="cameraCanvas" style="display:none;"></canvas>
+
+            <!-- Captured Image Preview & Review -->
+            <div id="previewWrap" class="preview hidden">
+              <div class="preview-header">
+                <span class="preview-tag">✓ Live Photo Captured & Geo-Tagged</span>
+                <div class="preview-actions-group">
+                  <button type="button" id="retakePhotoBtn" class="btn btn-light btn-sm">🔄 Retake Photo</button>
+                  <button type="button" id="removeImg" class="btn btn-danger btn-sm">✕ Remove</button>
+                </div>
+              </div>
+              <div class="preview-img-box">
+                <img id="preview" alt="Issue Preview">
+                <div id="geoWatermarkBadge" class="geo-watermark-overlay"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="aiBox" class="ai-box hidden">
+            <div class="ai-head">
+              <span>🤖 AI Vision Inspection</span>
+              <span class="pulse">● Live Analysis</span>
+            </div>
+            <div id="aiResult" class="ai-result"></div>
+          </div>
+
+          <label>Description & Landmarks
+            <textarea id="description" rows="3" required placeholder="Describe what you observed, nearby landmark, and potential hazard..."></textarea>
+          </label>
+
+          <div class="location-box">
+            <div>
+              <b>📍 Location & Ward Assignment</b>
+              <p id="locationText">Click below to acquire high-accuracy GPS satellite fix.</p>
+            </div>
+            <button type="button" id="locateBtn" class="btn btn-primary">📡 Use My Location</button>
+          </div>
+
+          <div id="reportMap" class="map-container"></div>
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg">Submit & Dispatch to Municipal Officer →</button>
+        </form>
+      </section>
+
+      <aside class="panel tips">
+        <h3>💡 Smart Reporting Guidelines</h3>
+        <ul>
+          <li><strong>Clear Visibility:</strong> Ensure proper lighting and capture the full severity of the problem.</li>
+          <li><strong>Accurate Geolocation:</strong> Use the interactive pin or GPS for instant Ward routing.</li>
+          <li><strong>Automated Nodal Alerts:</strong> Upon submission, an executive alert is emailed directly to the municipal zonal engineer.</li>
+          <li><strong>Duplicate Prevention:</strong> Issues in the same ward receive upvotes from fellow citizens to accelerate priority.</li>
+        </ul>
+        <div class="privacy">🔒 End-to-End Encrypted Civic Tech • Municipal Administration Portal</div>
+      </aside>
+    </div>
+  </main>
+
+  <div id="toast"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

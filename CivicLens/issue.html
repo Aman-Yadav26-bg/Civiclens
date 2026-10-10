@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Issue Details & Resolution Audit | CivicLens</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar dashboard-nav">
+    <a class="brand" href="dashboard.html"><span>🌿</span> CivicLens</a>
+    <div class="navlinks">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="complaints.html">Civic Issues</a>
+      <a href="officer.html">Officer Desk</a>
+      <a href="admin.html">Admin</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">Complaint Lifecycle & Resolution Audit</span>
+        <h1 id="issueTitle">CIV-2026-1048</h1>
+        <p id="issueSubtitle">Pothole • Sector 12</p>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <span id="issuePriorityBadge"></span>
+        <span id="issueStatusBadge"></span>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <section class="panel">
+        <div id="issuePhotos" class="issue-photo-container"></div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h3 style="margin:0;">Issue Description & Observation</h3>
+          <button id="issueUpvoteBtn" class="upvote-btn" style="font-size:13px;padding:6px 14px;">
+            👍 Upvote Issue (<span id="issueUpvoteCount">14</span>)
+          </button>
+        </div>
+        <p id="issueDescription" style="color:#50645a;line-height:1.6;font-size:14px;"></p>
+
+        <div class="detail-grid">
+          <div>
+            <small>AI Vision Classification</small>
+            <b id="aiClass">Pothole — 92% Confidence</b>
+          </div>
+          <div>
+            <small>AI Risk & Priority Score</small>
+            <b id="riskScore">87 / 100 • High</b>
+          </div>
+          <div>
+            <small>Routing Department</small>
+            <b id="issueDept">Public Works Department</b>
+          </div>
+          <div>
+            <small>Assigned Field Officer</small>
+            <b id="issueOfficer">Rahul Kumar</b>
+          </div>
+          <div style="grid-column: span 2;">
+            <small>Municipal Ward Jurisdiction</small>
+            <b id="issueWard">Ward 12 (Central)</b>
+          </div>
+        </div>
+
+        <h3 style="margin:24px 0 10px;">📍 GIS Geolocation Pin</h3>
+        <div id="issueMap" class="map-container-lg"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Complaint Lifecycle Journey</h2>
+          <span class="badge low">Real-Time Audit</span>
+        </div>
+
+        <div id="issueTimeline" class="timeline">
+          <div class="done">
+            <b>Reported</b>
+            <small>Citizen filed ticket with live GPS & photo</small>
+          </div>
+          <div class="done">
+            <b>Assigned</b>
+            <small>Dispatched to Road & Civil Works Division</small>
+          </div>
+          <div class="done">
+            <b>In Progress</b>
+            <small>Field crew dispatched for asphalt patch work</small>
+          </div>
+          <div class="current">
+            <b>Resolution Proof Uploaded</b>
+            <small>Awaiting citizen confirmation</small>
+          </div>
+        </div>
+
+        <div style="margin-top:25px;display:grid;gap:10px;">
+          <button class="btn btn-primary btn-full" onclick="verifyIssue()">✓ Verify & Close Ticket</button>
+          <button class="btn btn-light btn-full" onclick="reopenIssue()">↻ Reopen (Issue Persists)</button>
+          <a href="complaints.html" class="btn btn-outline btn-full">← Back to All Issues</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="toast"></div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>

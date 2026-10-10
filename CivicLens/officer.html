@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Municipal Officer Desk | CivicLens</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar dashboard-nav">
+    <a class="brand" href="officer.html"><span>🌿</span> CivicLens <em>OFFICER</em></a>
+    <div class="navlinks">
+      <a class="active" href="officer.html">Officer Desk</a>
+      <a href="complaints.html">Citizen View</a>
+      <a href="admin.html">Admin Command</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="welcome">
+      <div>
+        <span class="eyebrow">Municipal Officer Portal • Field Execution</span>
+        <h1>Officer Resolution Queue</h1>
+        <p>Manage assigned ward tickets, update field progress, and submit mandatory resolution proof photos.</p>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <select id="officerWardFilter" style="padding:10px 14px;border-radius:8px;border:1px solid #cbe0d3;font-weight:600;">
+          <option value="All Wards">🏛️ All Assigned Wards</option>
+          <option value="Ward 12">Ward 12 (Central)</option>
+          <option value="Ward 07">Ward 07 (North)</option>
+          <option value="Ward 04">Ward 04 (East)</option>
+          <option value="Ward 15">Ward 15 (South)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span>📋</span>
+        <b id="statAssigned">4</b>
+        <small>Assigned / Pending</small>
+      </div>
+      <div class="stat">
+        <span>🔧</span>
+        <b id="statInProgress">2</b>
+        <small>Work In Progress</small>
+      </div>
+      <div class="stat success">
+        <span>✓</span>
+        <b id="statResolved">3</b>
+        <small>Resolved with Proof</small>
+      </div>
+      <div class="stat">
+        <span>⚡</span>
+        <b>94%</b>
+        <small>SLA Compliance</small>
+      </div>
+    </div>
+
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Priority Action Queue</h2>
+        <span class="badge high">AI Risk Ranked</span>
+      </div>
+      <div id="officerList"></div>
+    </section>
+  </main>
+
+  <div id="toast"></div>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | CivicLens</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-body">
+  <div class="auth-card">
+    <a class="brand" href="index.html"><span>🌿</span> CivicLens</a>
+    <h1>Welcome back</h1>
+    <p>Sign in to manage civic reports and municipal workflows.</p>
+
+    <div class="demo-login">
+      <b>🚀 Instant SIH Demo Logins (1-Click)</b>
+      <small style="color:#667b70;">Click any role below to test the full role-based workflow:</small>
+      <div class="demo-login-btns">
+        <button type="button" class="demo-btn" onclick="quickFillDemo('citizen')">👤 Citizen Demo</button>
+        <button type="button" class="demo-btn" onclick="quickFillDemo('officer')">👷 Officer Demo</button>
+        <button type="button" class="demo-btn" onclick="quickFillDemo('admin')">🏛️ Admin Demo</button>
+      </div>
+    </div>
+
+    <form id="loginForm">
+      <label>Email Address
+        <input id="email" type="email" placeholder="you@example.com" required value="citizen@demo.com">
+      </label>
+      <label>Password
+        <input id="password" type="password" placeholder="••••••••" required value="password123">
+      </label>
+      <button type="submit" class="btn btn-primary btn-full btn-lg">Sign In to CivicLens →</button>
+    </form>
+
+    <p class="center" style="margin-top:20px;">New citizen? <a href="register.html">Create an account</a></p>
+    <a class="back" href="index.html">← Back to Homepage</a>
+  </div>
+
+  <div id="toast"></div>
+  <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Civic Issues & Public Tracker | CivicLens</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <nav class="navbar dashboard-nav">
+    <a class="brand" href="dashboard.html"><span>🌿</span> CivicLens</a>
+    <div class="navlinks">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="report.html">Report Issue</a>
+      <a class="active" href="complaints.html">Civic Issues</a>
+      <a href="officer.html">Officer Desk</a>
+      <a href="admin.html">Admin Command</a>
+      <a href="index.html">Logout</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">Public Issue Tracker • SIH25031</span>
+        <h1>Community Complaints</h1>
+        <p>Live transparency tracking from citizen report to verified field resolution.</p>
+      </div>
+      <a href="report.html" class="btn btn-primary">+ File New Issue</a>
+    </div>
+
+    <div class="filterbar">
+      <input id="searchComplaints" placeholder="🔎 Search by ID, category, or locality...">
+      <select id="statusFilter">
+        <option value="All Status">All Statuses</option>
+        <option value="Reported">🔴 Reported / Pending</option>
+        <option value="In Progress">🟡 In Progress</option>
+        <option value="Assigned">🟡 Assigned</option>
+        <option value="Resolved">🟢 Resolved</option>
+      </select>
+      <select id="wardFilter">
+        <option value="All Wards">All Municipal Wards</option>
+        <option value="Ward 12">Ward 12 (Central)</option>
+        <option value="Ward 07">Ward 07 (North)</option>
+        <option value="Ward 04">Ward 04 (East)</option>
+        <option value="Ward 15">Ward 15 (South)</option>
+      </select>
+      <select id="categoryFilter">
+        <option value="All">All Categories</option>
+        <option value="Pothole">Potholes</option>
+        <option value="Garbage">Garbage</option>
+        <option value="Street Light">Street Lights</option>
+        <option value="Water Leakage">Water Leakage</option>
+      </select>
+    </div>
+
+    <section id="complaintGrid" class="complaint-grid"></section>
+  </main>
+
+  <div id="toast"></div>
+  <script src="js/script.js"></script>
+</body>
+</html>
